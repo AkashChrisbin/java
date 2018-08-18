@@ -1,0 +1,61 @@
+entity Task {
+	taskcode Number
+    taskname String
+    taskestimate Number
+}
+
+entity TeamMember {
+	teamcode  Text
+    employeeid Text
+    departmentcode Text
+               
+}
+
+// an ignored comment
+/** not an ignored comment */
+entity Team {
+	taskcode Text,
+	teamcode Text,
+	teamleader String,
+	departmentcode Text
+}
+
+entity Employee {
+	employeeid Text
+    assignedtask Text
+    completed Text
+    inprogress  Text
+    backlog   Text
+    employeename String
+    phonenumber Number
+}
+
+/**
+ * Task entity.
+ * @author Akash.
+ */
+relationship OneToOne {
+	TeamMember{employeeid} to Employee
+}
+
+
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Task{taskcode} to Team,
+	/**
+	* A relationship
+	*/
+	Team{teamcode} to TeamMember
+
+}
+
+// Set pagination options
+paginate * with pagination
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl 
+// Set an angular suffix
+angularSuffix * with mySuffix
